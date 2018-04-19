@@ -3,6 +3,8 @@ version: '3'
 services:
   concourse-db:
     image: postgres
+    ports: ["5432:5432"]
+    volumes: ["./database:/database"]
     environment:
     - POSTGRES_DB=concourse
     - POSTGRES_PASSWORD=concourse_pass
@@ -22,8 +24,8 @@ services:
     - CONCOURSE_POSTGRES_PASSWORD=concourse_pass
     - CONCOURSE_POSTGRES_DATABASE=concourse
     - CONCOURSE_EXTERNAL_URL
-    - CONCOURSE_BASIC_AUTH_USERNAME
-    - CONCOURSE_BASIC_AUTH_PASSWORD
+    - CONCOURSE_BASIC_AUTH_USERNAME=concourse
+    - CONCOURSE_BASIC_AUTH_PASSWORD=concourse
     - CONCOURSE_NO_REALLY_I_DONT_WANT_ANY_AUTH
 
   concourse-worker:
@@ -32,7 +34,9 @@ services:
     privileged: true
     links: [concourse-web]
     depends_on: [concourse-web]
-    volumes: ["./keys/worker:/concourse-keys"]
+    volumes: ["./keys/worker:/concourse-keys", "./worker:/worker"]
     environment:
     - CONCOURSE_TSA_HOST=concourse-web:2222
     - CONCOURSE_GARDEN_NETWORK
+    - CONCOURSE_WORK_DIR=/worker
+
