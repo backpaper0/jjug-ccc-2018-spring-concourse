@@ -371,7 +371,7 @@ hook
 
 modifier
 
-`tags` / `timeout` / `attempts`
+- `tags` / `timeout` / `attempts`
 
 ---
 
@@ -381,6 +381,9 @@ modifier
 - `fly set-pipeline`コマンドで登録する
 
 ```sh
+# sp は set-pipeline のエイリアス
+# -p でパイプライン名を設定
+# -c でパイプラインの定義ファイルを指定
 fly -t main sp -p my-pipeline -c my-pipeline.yml
 ```
 
@@ -394,10 +397,10 @@ resources:
   type: git
   source:
     uri: https://github.com/backpaper0/collectors.git
-- name: cron
+- name: timer
   type: time
   source:
-    interval: 60s
+    interval: 1m
 ```
 
 ---
@@ -516,11 +519,13 @@ resources:
 ## flyコマンド
 
 ```sh
+# ログイン
 fly -t main login -c http://localhost:8080
+# パイプラインを登録する
 fly -t main sp -p my-pipeline -c my-pipeline.yml
-fly -t main up -p my-pipeline
-fly -t main cr -r my-pipeline/my-resource
+# ジョブを起動する
 fly -t main tj -j my-pipeline/my-job
+# one-off buildをする
 fly -t main e -c my-task.yml
 ```
 
@@ -539,7 +544,7 @@ class: center, middle
 - one-off build (with resource)
 - pipeline 1: 1 task
 - pipeline 2: 1 resource, 1 task
-- pipeline 3: 3 resource, 3 task
+- pipeline 3: n resource, n task
 
 ---
 
