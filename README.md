@@ -22,3 +22,7 @@ Concourseのことだけ話します。
 
 Concourseは知っているけど導入していない人。試してみたい人。
 
+## スライド
+
+https://backpaper0.github.io/jjug-ccc-2018-spring-concourse/slide/index.html
+
