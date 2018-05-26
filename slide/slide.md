@@ -571,5 +571,12 @@ class: center, middle
 - https://concourse-ci.org/
 - https://concoursetutorial.com/
 - https://github.com/concourse/concourse-docker
+- https://github.com/concourse/web
+- https://github.com/concourse/atc
+- https://github.com/concourse/tsa
+- https://github.com/concourse/worker
+- https://github.com/concourse/garden
+- https://github.com/concourse/baggageclaim
+- https://github.com/concourse/fly
 - https://github.com/backpaper0/jjug-ccc-2018-spring-concourse
 
