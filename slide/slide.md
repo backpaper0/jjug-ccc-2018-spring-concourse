@@ -7,7 +7,11 @@ class: center, middle
 ## 自己紹介
 
 - うらがみ
-- `@backpaper0` / `urgm.jp`
+- `@backpaper0`
+   [🐙](https://github.com/backpaper0)
+   [📷](https://www.instagram.com/backpaper0/)
+   [🐦](https://twitter.com/backpaper0)
+   [📝](http://backpaper0.github.io/)
 - 大阪 / 11年ちょい / Java
 
 ---
