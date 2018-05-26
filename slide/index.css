@@ -48,5 +48,12 @@ th, td {
 }
 .image img {
   width: 100%;
-  border: solid thin #231815;
+  border: solid thin #4dbfd2;
+}
+.image2 {
+  text-align: center;
+}
+.image2 img {
+  width: 75%;
+  border: solid thin #4dbfd2;
 }

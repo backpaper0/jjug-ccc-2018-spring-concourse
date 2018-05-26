@@ -1,0 +1,56 @@
+resources:
+- name: hello
+  type: git
+  source:
+    uri: https://github.com/backpaper0/hello.git
+- name: world
+  type: git
+  source:
+    uri: https://github.com/backpaper0/world.git
+- name: helloworld
+  type: git
+  source:
+    uri: https://github.com/backpaper0/helloworld.git
+
+jobs:
+- name: build-hello
+  plan:
+  - get: hello
+    trigger: true
+  - task: build-hello
+    file: hello/ci/build-task.yml
+- name: build-world
+  plan:
+  - get: world
+    trigger: true
+  - task: build-world
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: maven, tag: 3-jdk-8}
+      inputs:
+        - name: world
+      caches:
+        - path: m2repo
+      run:
+        path: sh
+        args:
+          - -c
+          - |-
+            rm -fr ~/.m2
+            ln -s `pwd`/m2repo ~/.m2
+            cd world
+            mvn package
+- name: build-helloworld
+  plan:
+  - aggregate:
+    - get: hello
+      passed: [build-hello]
+    - get: world
+      passed: [build-world]
+  - get: helloworld
+    trigger: true
+  - task: build-helloworld
+    file: helloworld/ci/build-task.yml
+

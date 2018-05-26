@@ -1,0 +1,25 @@
+resources:
+- name: echo
+  type: git
+  source:
+    uri: https://github.com/backpaper0/echo.git
+
+jobs:
+- name: hello
+  plan:
+  - get: echo
+    trigger: true
+  - task: echo time
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: busybox}
+      inputs:
+      - name: echo
+      run:
+        path: sh
+        args:
+        - -c
+        - |-
+          cat echo/hello

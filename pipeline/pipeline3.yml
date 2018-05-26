@@ -1,0 +1,39 @@
+resources:
+- name: echo
+  type: git
+  source:
+    uri: https://github.com/backpaper0/echo.git
+- name: timer
+  type: time
+  source:
+    interval: 1m
+
+jobs:
+- name: hello
+  plan:
+  - get: echo
+    trigger: true
+  - task: echo hello
+    file: echo/task.yml
+- name: time
+  plan:
+  - get: echo
+    trigger: true
+    passed: [hello]
+  - get: timer
+    trigger: true
+  - task: echo time
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source: {repository: busybox}
+      inputs:
+      - name: echo
+      - name: timer
+      run:
+        path: sh
+        args:
+        - -c
+        - |-
+          cat echo/hello timer/input
