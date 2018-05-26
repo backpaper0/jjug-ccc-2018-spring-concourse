@@ -544,7 +544,7 @@ class: center, middle
 - one-off build (with resource)
 - pipeline 1: 1 task
 - pipeline 2: 1 resource, 1 task
-- pipeline 3: n resource, n task
+- pipeline 3: n resources, n tasks
 
 ---
 

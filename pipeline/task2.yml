@@ -1,3 +1,5 @@
+# one-off build with resource
+
 platform: linux
 
 image_resource:

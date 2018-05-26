@@ -1,3 +1,5 @@
+# n resources, n tasks
+
 resources:
 - name: echo
   type: git
